@@ -4,8 +4,9 @@ namespace VideoGame {
     export class Render {
         private readonly canvas: HTMLCanvasElement;
         private readonly context: CanvasRenderingContext2D;
-
         private readonly playerHealthContainer: HTMLSpanElement;
+
+        private readonly thornicleBushImage: HTMLImageElement;
 
         constructor(container: HTMLElement) {
             const canvas = document.createElement("canvas");
@@ -18,12 +19,17 @@ namespace VideoGame {
 
             const playerHealthContainer = document.createElement("span");
 
+            const thornicleBushImage = document.createElement("img");
+            thornicleBushImage.src = "thornicleBush.png";
+
             container.appendChild(canvas);
             container.appendChild(playerHealthContainer);
 
             this.canvas = canvas;
             this.context = context;
             this.playerHealthContainer = playerHealthContainer;
+
+            this.thornicleBushImage = thornicleBushImage;
         }
 
         render(state: State): void {
@@ -42,11 +48,10 @@ namespace VideoGame {
 
             this.context.fillStyle = "red";
             for (let object of state.thornicleBushes) {
-                this.context.fillRect(
+                this.context.drawImage(
+                    /* image */ this.thornicleBushImage,
                     /* x */ UNIT * object.x - UNIT / 2,
                     /* y */ UNIT * object.y - UNIT / 2,
-                    /* w */ UNIT,
-                    /* h */ UNIT,
                 );
             }
         }
