@@ -5,15 +5,30 @@ namespace VideoGame {
         private readonly canvas: HTMLCanvasElement;
         private readonly context: CanvasRenderingContext2D;
 
-        constructor(canvas: HTMLCanvasElement) {
-            this.canvas = canvas;
+        private readonly playerHealthContainer: HTMLSpanElement;
+
+        constructor(container: HTMLElement) {
+            const canvas = document.createElement("canvas");
+            canvas.width = 640;
+            canvas.height = 480;
+
             const context = canvas.getContext("2d");
             if (context === null)
                 throw Error("Cannot create canvas rendering context");
+
+            const playerHealthContainer = document.createElement("span");
+
+            container.appendChild(canvas);
+            container.appendChild(playerHealthContainer);
+
+            this.canvas = canvas;
             this.context = context;
+            this.playerHealthContainer = playerHealthContainer;
         }
 
         render(state: State): void {
+            this.playerHealthContainer.textContent = "" + state.playerHealth;
+
             this.context.fillStyle = "black";
             this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 

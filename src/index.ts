@@ -2,11 +2,7 @@ namespace VideoGame {
     export function main(): void {
         const state = new State();
 
-        const canvas = document.createElement("canvas");
-        const render = new Render(canvas);
-        canvas.width = 640;
-        canvas.height = 480;
-        document.body.appendChild(canvas);
+        const render = new Render(document.body);
 
         render.render(state);
         addEventListener("keydown", ev => {
