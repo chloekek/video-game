@@ -6,6 +6,7 @@ namespace VideoGame {
         private readonly context: CanvasRenderingContext2D;
         private readonly playerHealthContainer: HTMLSpanElement;
 
+        private readonly stickImage: HTMLImageElement;
         private readonly thornicleBushImage: HTMLImageElement;
 
         constructor(container: HTMLElement) {
@@ -19,6 +20,9 @@ namespace VideoGame {
 
             const playerHealthContainer = document.createElement("span");
 
+            const stickImage = document.createElement("img");
+            stickImage.src = "stick.png";
+
             const thornicleBushImage = document.createElement("img");
             thornicleBushImage.src = "thornicleBush.png";
 
@@ -29,13 +33,14 @@ namespace VideoGame {
             this.context = context;
             this.playerHealthContainer = playerHealthContainer;
 
+            this.stickImage = stickImage;
             this.thornicleBushImage = thornicleBushImage;
         }
 
         render(state: State): void {
             this.playerHealthContainer.textContent = "" + state.playerHealth;
 
-            this.context.fillStyle = "black";
+            this.context.fillStyle = "silver";
             this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
             this.context.fillStyle = "green";
@@ -46,7 +51,14 @@ namespace VideoGame {
                 /* h */ UNIT,
             );
 
-            this.context.fillStyle = "red";
+            for (let object of state.sticks) {
+                this.context.drawImage(
+                    /* image */ this.stickImage,
+                    /* x */ UNIT * object.x - UNIT / 2,
+                    /* y */ UNIT * object.y - UNIT / 2,
+                );
+            }
+
             for (let object of state.thornicleBushes) {
                 this.context.drawImage(
                     /* image */ this.thornicleBushImage,

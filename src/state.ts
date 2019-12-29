@@ -4,12 +4,17 @@ namespace VideoGame {
         public playerY: number;
         public playerHealth: number;
 
+        public sticks: Stick[];
         public thornicleBushes: ThornicleBush[];
 
         constructor() {
             this.playerX = 0;
             this.playerY = 0;
             this.playerHealth = 100;
+
+            this.sticks = [
+                new Stick(6, 9),
+            ];
 
             this.thornicleBushes = [
                 new ThornicleBush(5, 5),
