@@ -24,6 +24,16 @@ namespace VideoGame {
                 /* w */ UNIT,
                 /* h */ UNIT,
             );
+
+            this.context.fillStyle = "red";
+            for (let object of state.thornicleBushes) {
+                this.context.fillRect(
+                    /* x */ UNIT * object.x - UNIT / 2,
+                    /* y */ UNIT * object.y - UNIT / 2,
+                    /* w */ UNIT,
+                    /* h */ UNIT,
+                );
+            }
         }
     }
 }
