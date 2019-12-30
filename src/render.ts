@@ -7,7 +7,6 @@ namespace VideoGame {
         private readonly playerHealthContainer: HTMLSpanElement;
 
         private readonly stickImage: HTMLImageElement;
-        private readonly thornicleBushImage: HTMLImageElement;
 
         constructor(container: HTMLElement) {
             const canvas = document.createElement("canvas");
@@ -23,9 +22,6 @@ namespace VideoGame {
             const stickImage = document.createElement("img");
             stickImage.src = "stick.png";
 
-            const thornicleBushImage = document.createElement("img");
-            thornicleBushImage.src = "thornicleBush.png";
-
             container.appendChild(canvas);
             container.appendChild(playerHealthContainer);
 
@@ -34,7 +30,6 @@ namespace VideoGame {
             this.playerHealthContainer = playerHealthContainer;
 
             this.stickImage = stickImage;
-            this.thornicleBushImage = thornicleBushImage;
         }
 
         render(state: State): void {
@@ -65,12 +60,10 @@ namespace VideoGame {
         }
 
         private renderEntity(x: number, y: number, entity: Entity): void {
-            if (entity instanceof ThornicleBush)
-                this.context.drawImage(
-                    /* image */ this.thornicleBushImage,
-                    /* x */ UNIT * x - UNIT / 2,
-                    /* y */ UNIT * y - UNIT / 2,
-                );
+            const sprite = entity.sprite();
+            const px = UNIT * x - sprite.width / 2;
+            const py = UNIT * y - sprite.height / 2;
+            this.context.drawImage(sprite, px, py);
         }
 
         private renderItem(x: number, y: number, item: Item): void {
