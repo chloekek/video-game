@@ -74,7 +74,7 @@ namespace VideoGame {
         }
 
         private renderItem(x: number, y: number, item: Item): void {
-            if (item instanceof Stick)
+            if (item === Item.Stick)
                 this.context.drawImage(
                     /* image */ this.stickImage,
                     /* x */ UNIT * x - UNIT / 2,

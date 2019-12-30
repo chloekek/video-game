@@ -16,7 +16,7 @@ namespace VideoGame {
             this.world.spawnEntity(5, 5, new ThornicleBush());
             this.world.spawnEntity(9, 6, new ThornicleBush());
 
-            this.world.spawnItem(6, 9, new Stick());
+            this.world.spawnItem(6, 9, Item.Stick);
         }
 
         travel(dx: number, dy: number): void {

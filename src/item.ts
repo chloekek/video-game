@@ -1,4 +1,5 @@
 namespace VideoGame {
-    export interface Item {
+    export enum Item {
+        Stick,
     }
 }
