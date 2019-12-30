@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "alwaysStrict": true,
+        "downlevelIteration": true,
         "lib": ["ES2015", "DOM"],
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,

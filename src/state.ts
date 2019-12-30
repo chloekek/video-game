@@ -1,25 +1,22 @@
 namespace VideoGame {
     export class State {
+        public readonly world: World;
+
         public playerX: number;
         public playerY: number;
         public playerHealth: number;
 
-        public sticks: Stick[];
-        public thornicleBushes: ThornicleBush[];
-
         constructor() {
+            this.world = new World(32, 32);
+
             this.playerX = 0;
             this.playerY = 0;
             this.playerHealth = 100;
 
-            this.sticks = [
-                new Stick(6, 9),
-            ];
+            this.world.spawnEntity(5, 5, new ThornicleBush());
+            this.world.spawnEntity(9, 6, new ThornicleBush());
 
-            this.thornicleBushes = [
-                new ThornicleBush(5, 5),
-                new ThornicleBush(9, 6),
-            ];
+            this.world.spawnItem(6, 9, new Stick());
         }
 
         travel(dx: number, dy: number): void {
@@ -40,10 +37,10 @@ namespace VideoGame {
         }
 
         thornicleBushAt(x: number, y: number): boolean {
-            for (let object of this.thornicleBushes)
-                if (object.x === x && object.y === y)
-                    return true;
-            return false;
+            const tile = this.world.tileAt(x, y);
+            if (tile === null)
+                return false;
+            return tile.entity instanceof ThornicleBush;
         }
     }
 }

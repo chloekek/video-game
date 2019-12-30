@@ -51,21 +51,35 @@ namespace VideoGame {
                 /* h */ UNIT,
             );
 
-            for (let object of state.sticks) {
-                this.context.drawImage(
-                    /* image */ this.stickImage,
-                    /* x */ UNIT * object.x - UNIT / 2,
-                    /* y */ UNIT * object.y - UNIT / 2,
-                );
-            }
+            for (let [x, y, tile] of state.world.positionedTiles())
+                this.renderTile(x, y, tile);
+        }
 
-            for (let object of state.thornicleBushes) {
+        private renderTile(x: number, y: number, tile: Tile): void {
+            const entity = tile.entity;
+            if (entity !== null)
+                this.renderEntity(x, y, entity);
+
+            for (let item of tile.items)
+                this.renderItem(x, y, item);
+        }
+
+        private renderEntity(x: number, y: number, entity: Entity): void {
+            if (entity instanceof ThornicleBush)
                 this.context.drawImage(
                     /* image */ this.thornicleBushImage,
-                    /* x */ UNIT * object.x - UNIT / 2,
-                    /* y */ UNIT * object.y - UNIT / 2,
+                    /* x */ UNIT * x - UNIT / 2,
+                    /* y */ UNIT * y - UNIT / 2,
                 );
-            }
+        }
+
+        private renderItem(x: number, y: number, item: Item): void {
+            if (item instanceof Stick)
+                this.context.drawImage(
+                    /* image */ this.stickImage,
+                    /* x */ UNIT * x - UNIT / 2,
+                    /* y */ UNIT * y - UNIT / 2,
+                );
         }
     }
 }
